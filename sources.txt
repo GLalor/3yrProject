@@ -1,0 +1,11 @@
+sql lite form - https://forum.ionicframework.com/t/what-persistent-data-storages-should-i-use/3707/15
+sql lite git - https://github.com/litehelpers/Cordova-sqlite-storage
+storage install and use - http://ionicframework.com/docs/v2/storage/
+
+
+(all above 25/02/2017)
+
+todo list used - https://www.joshmorony.com/build-a-todo-app-from-scratch-with-ionic-2-video-tutorial/ 4/03/2017
+
+swipe delete funcionality (couldnt get a button to work)
+https://www.thepolyglotdeveloper.com/2015/03/create-todo-list-mobile-app-using-ionic-framework/ 04/03/2017
