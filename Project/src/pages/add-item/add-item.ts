@@ -9,6 +9,8 @@ export class AddItemPage {
 
   title;
   description;
+  myDate: String = new Date().toISOString();
+  reminder = false;
 
   constructor(public navCtrl: NavController, public view: ViewController) {
 
@@ -18,8 +20,10 @@ export class AddItemPage {
       let newItem = {
         title: this.title,
         description: this.description,
+        myDate: this.myDate,
+        reminder: this.reminder
       };
-
+      //this.schedule(newItem);
 
     this.view.dismiss(newItem);
 

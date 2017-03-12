@@ -3,22 +3,26 @@ import { ModalController, NavController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { Data } from '../../providers/data';
+import { Scheduler } from '../../providers/scheduler'
 import { NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
+
 @Component({
   selector: 'page-todo',
-  templateUrl: 'todo.html'
+  templateUrl: 'todo.html',
+  providers: [Scheduler]
 })
 export class ToDoPage {
 
   public items = [];
   title;
   description;
-
+  myDate;
+  reminder;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data,
-    public navParams: NavParams, public alertCtrl: AlertController) {
-
+    public scheduleService: Scheduler, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.reminder = this.scheduleService.getNotificationCheck();
     this.dataService.getData().then((todos) => {
 
       if (todos) {
@@ -53,23 +57,24 @@ export class ToDoPage {
     var l = this.items.length;
     for (var i = 0; i < l; i++) {
       if (this.items[i].title == item.title) {
-        this.items.splice(i,1);
+        this.items.splice(i, 1);
         this.dataService.save(this.items);
       }
     }
   }
 
   viewItem(item) {
-    if (typeof (item.description) == 'undefined') {
-      let alert = this.alertCtrl.create({
-        title: item.title,
-        buttons: ['OK']
-      });
-      alert.present();
-    } else {
       this.navCtrl.push(ItemDetailPage, {
         item: item
       });
+  }
+  // Notifaications 
+  public scheduleNotifcation(item) {
+    if (this.reminder == true) {
+      this.scheduleService.schedule(item);
+    }else if (this.reminder == false) {
+      
     }
+    //this.scheduleService.schedule(item);
   }
 }

@@ -9,6 +9,8 @@ export class ItemDetailPage {
  
   title;
   description;
+  myDate;
+  reminder;
  
   constructor(public navParams: NavParams){
  
@@ -17,6 +19,8 @@ export class ItemDetailPage {
   ionViewDidLoad() {
     this.title = this.navParams.get('item').title;
     this.description = this.navParams.get('item').description;
+    this.myDate = this.navParams.get('item').myDate;
+    this.reminder = this.navParams.get('item').reminder;
   }
  
 }

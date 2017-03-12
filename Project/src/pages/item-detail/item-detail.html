@@ -11,5 +11,16 @@
     <ion-card-content>
       {{description}}
     </ion-card-content>
+    <ion-card-content>
+      <ion-item>
+      <ion-label *ngIf="!reminder">Would you like a reminder?</ion-label>
+      <ion-label *ngIf="reminder">Great! When would you like if?</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="reminder"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="reminder">
+      <ion-label floating>Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm"  [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+    </ion-card-content>
   </ion-card>
 </ion-content>

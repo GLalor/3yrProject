@@ -12,8 +12,10 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let item of items">
-    <ion-item  (click)="viewItem(item)">
-      {{item.title}}
+    <ion-item>
+      <ion-label (click)="viewItem(item)">{{item.title}} </ion-label>
+      {{myDate | date:'fullDate'}}
+      <ion-toggle color="secondary" [(ngModel)]="item.reminder" (ionChange)="scheduleNotifcation(item)"></ion-toggle>
     </ion-item>
     <ion-item-options side="right">
       <button ion-button icon-only (click)="deleteItem(item)"><ion-icon name="trash" role="img" class="icon icon-ios ion-ios-trash" aria-label="trash"></ion-icon></button>
