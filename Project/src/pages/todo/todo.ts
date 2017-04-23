@@ -20,6 +20,7 @@ export class ToDoPage {
   description;
   myDate;
   reminder;
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data,
     public scheduleService: Scheduler, public navParams: NavParams, public alertCtrl: AlertController) {
     this.reminder = this.scheduleService.getNotificationCheck();
@@ -37,7 +38,8 @@ export class ToDoPage {
   }
 
   addItem() {
-    let addModal = this.modalCtrl.create(AddItemPage);
+    var count = this.items.length;
+    let addModal = this.modalCtrl.create(AddItemPage, {count: count});
     addModal.onDidDismiss((item) => {
       if (item) {
         this.saveItem(item);
@@ -64,17 +66,33 @@ export class ToDoPage {
   }
 
   viewItem(item) {
-      this.navCtrl.push(ItemDetailPage, {
-        item: item
-      });
+    this.navCtrl.push(ItemDetailPage, {
+      item: item
+    });
   }
+
   // Notifaications 
   public scheduleNotifcation(item) {
-    if (this.reminder == true) {
-      this.scheduleService.schedule(item);
-    }else if (this.reminder == false) {
-      
-    }
+    if (item.reminder == true) {
+      console.log("goign to scheduleNotifcation func!!");
+      this.scheduleService.scheduleNotification(item);
+    } 
     //this.scheduleService.schedule(item);
+  }
+
+  public cancelNotifcation(item) {
+    if (item.reminder == false) {
+      console.log("on cancel");
+      this.scheduleService.cancelNotification(item);
+    }
+  }
+
+  infoAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Todo Info',
+      subTitle: "Click to view item and set reminder! Slide left to delete!",
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

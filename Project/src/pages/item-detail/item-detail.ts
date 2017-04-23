@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
+import { Scheduler } from '../../providers/scheduler'
  
 @Component({
   selector: 'page-item-detail',
-  templateUrl: 'item-detail.html'
+  templateUrl: 'item-detail.html',
+  providers: [Scheduler]
 })
 export class ItemDetailPage {
  
   title;
   description;
   myDate;
-  reminder;
- 
-  constructor(public navParams: NavParams){
- 
+  reminder= false;
+  constructor(public navParams: NavParams, public scheduleService: Scheduler){
   }
  
   ionViewDidLoad() {

@@ -17,20 +17,23 @@ export class Scheduler {
   }
 
   constructor(public http: Http, public alertCtrl: AlertController) {
-    console.log('Hello Scheduler Provider');
   }
+
   // schedule a LocalNotifications
-  public schedule(item) {
+  public scheduleNotification(item) {
+    var notificationDate = new Date(item.myDate);
+    notificationDate.setMinutes(notificationDate.getMinutes() + notificationDate.getTimezoneOffset());
         LocalNotifications.schedule({
+            id: item.id,
             title: item.title,
             text: item.description,
-            at: item.date,
+            at: notificationDate,
             sound: null
         });
     }
 
-    public cancelNotification(){
-      
+    public cancelNotification(item){
+      LocalNotifications.cancel(item.id);
     }
 
 }

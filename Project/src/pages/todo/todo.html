@@ -4,6 +4,9 @@
       Todos!
     </ion-title>
     <ion-buttons end>
+      <button ion-button icon-only (click)="infoAlert()"><ion-icon name="ios-information-circle-outline"></ion-icon></button>
+    </ion-buttons>
+    <ion-buttons end>
       <button ion-button icon-only (click)="addItem()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
@@ -11,15 +14,18 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header>
+      Your Todo List!
+    </ion-list-header>
     <ion-item-sliding *ngFor="let item of items">
-    <ion-item>
-      <ion-label (click)="viewItem(item)">{{item.title}} </ion-label>
-      {{myDate | date:'fullDate'}}
-      <ion-toggle color="secondary" [(ngModel)]="item.reminder" (ionChange)="scheduleNotifcation(item)"></ion-toggle>
-    </ion-item>
-    <ion-item-options side="right">
-      <button ion-button icon-only (click)="deleteItem(item)"><ion-icon name="trash" role="img" class="icon icon-ios ion-ios-trash" aria-label="trash"></ion-icon></button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
+      <ion-item detail-push>
+        <ion-label (click)="viewItem(item)">{{item.title}}</ion-label>
+        <ion-toggle color="secondary" [(ngModel)]="item.reminder" (ionChange)="cancelNotifcation(item)"></ion-toggle>
+        <ion-datetime style="font-size:80%;" *ngIf="item.reminder" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="item.myDate" (ionChange)="scheduleNotifcation(item)" ></ion-datetime>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button icon-only (click)="deleteItem(item)"><ion-icon name="trash" role="img" class="icon icon-ios ion-ios-trash" aria-label="trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
