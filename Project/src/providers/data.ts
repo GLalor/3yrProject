@@ -15,5 +15,14 @@ export class Data {
     let newData = JSON.stringify(data);
     this.storage.set('todos', newData);
   }
+
+  saveID(id){
+    let newID = JSON.stringify(id);
+    this.storage.set('itemID',newID);
+  }
+
+  getID(){
+    return this.storage.get('itemID');
+  }
  
 }

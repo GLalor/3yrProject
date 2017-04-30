@@ -23,11 +23,10 @@ export class AddItemPage {
     console.log("offset " +this.now.getTimezoneOffset());
     this.now.setMinutes(this.now.getMinutes() - this.now.getTimezoneOffset());
     this.now.setSeconds(0);
-    this.myDate = this.now.toISOString(); 
-    console.log(this.now);
+    this.myDate = this.now.toISOString();
   }
   ionViewDidLoad() {
-    this.id = this.navParams.get('count');
+    this.id = this.navParams.get('itemID');
   }
   saveItem() {
     let newItem = {
@@ -40,7 +39,7 @@ export class AddItemPage {
       this.scheduleService.scheduleNotification(newItem);
     }
     this.id = this.id + 1;
-    this.view.dismiss(newItem);
+    this.view.dismiss(newItem,this.id);
 
   }
 

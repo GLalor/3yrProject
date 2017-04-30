@@ -20,6 +20,7 @@ export class ToDoPage {
   description;
   myDate;
   reminder;
+  itemID = 0;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data,
     public scheduleService: Scheduler, public navParams: NavParams, public alertCtrl: AlertController) {
@@ -31,6 +32,13 @@ export class ToDoPage {
       }
 
     });
+    this.dataService.getID().then((id) => {
+
+      if (id) {
+        this.itemID = JSON.parse(id);
+      }
+
+    });
 
   }
 
@@ -38,11 +46,12 @@ export class ToDoPage {
   }
 
   addItem() {
-    var count = this.items.length;
-    let addModal = this.modalCtrl.create(AddItemPage, {count: count});
-    addModal.onDidDismiss((item) => {
+    let addModal = this.modalCtrl.create(AddItemPage, {itemID: this.itemID});
+    addModal.onDidDismiss((item,id) => {
       if (item) {
         this.saveItem(item);
+        this.dataService.saveID(id);
+        this.itemID = id;
       }
     });
     addModal.present();
@@ -54,8 +63,6 @@ export class ToDoPage {
   }
 
   deleteItem(item) {
-    console.log("in del");
-    console.log(item);
     var l = this.items.length;
     for (var i = 0; i < l; i++) {
       if (this.items[i].title == item.title) {
