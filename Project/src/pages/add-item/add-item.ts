@@ -13,12 +13,18 @@ export class AddItemPage {
 
   title;
   description;
-  myDate = new Date();
+  now = new Date();
+  myDate : String = new Date().toISOString();
   reminder = false;
   id;
 
   constructor(public navCtrl: NavController,public modalCtrl: ModalController, public view: ViewController, public scheduleService: Scheduler, 
   public navParams: NavParams) {
+    console.log("offset " +this.now.getTimezoneOffset());
+    this.now.setMinutes(this.now.getMinutes() - this.now.getTimezoneOffset());
+    this.now.setSeconds(0);
+    this.myDate = this.now.toISOString(); 
+    console.log(this.now);
   }
   ionViewDidLoad() {
     this.id = this.navParams.get('count');

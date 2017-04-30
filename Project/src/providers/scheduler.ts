@@ -23,6 +23,7 @@ export class Scheduler {
   public scheduleNotification(item) {
     var notificationDate = new Date(item.myDate);
     notificationDate.setMinutes(notificationDate.getMinutes() + notificationDate.getTimezoneOffset());
+    notificationDate.setSeconds(0);
         LocalNotifications.schedule({
             id: item.id,
             title: item.title,
@@ -36,4 +37,9 @@ export class Scheduler {
       LocalNotifications.cancel(item.id);
     }
 
+    public getAllTriggeredNotifications(){
+      return LocalNotifications.getAllTriggered().then(function(notifications){
+        return notifications;
+      });
+    }
 }
