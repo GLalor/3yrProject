@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController,NavController, ViewController } from 'ionic-angular';
 import { Scheduler } from '../../providers/scheduler';
-import {Storage} from '@ionic/storage';
+
 import { NavParams } from 'ionic-angular';
 
 @Component({
@@ -20,7 +20,6 @@ export class AddItemPage {
 
   constructor(public navCtrl: NavController,public modalCtrl: ModalController, public view: ViewController, public scheduleService: Scheduler, 
   public navParams: NavParams) {
-    console.log("offset " +this.now.getTimezoneOffset());
     this.now.setMinutes(this.now.getMinutes() - this.now.getTimezoneOffset());
     this.now.setSeconds(0);
     this.myDate = this.now.toISOString();

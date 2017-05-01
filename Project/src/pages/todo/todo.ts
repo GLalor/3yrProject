@@ -29,6 +29,7 @@ export class ToDoPage {
 
       if (todos) {
         this.items = JSON.parse(todos);
+        this.resetReminders();
       }
 
     });
@@ -39,10 +40,11 @@ export class ToDoPage {
       }
 
     });
-
+    
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    
   }
 
   addItem() {
@@ -81,17 +83,16 @@ export class ToDoPage {
   // Notifaications 
   public scheduleNotifcation(item) {
     if (item.reminder == true) {
-      console.log("goign to scheduleNotifcation func!!");
       this.scheduleService.scheduleNotification(item);
     } 
     //this.scheduleService.schedule(item);
   }
 
-  public cancelNotifcation(item) {
+public cancelNotifcation(item) {
     if (item.reminder == false) {
-      console.log("on cancel");
       this.scheduleService.cancelNotification(item);
     }
+    this.dataService.updateTODO(item);
   }
 
   infoAlert() {
@@ -101,5 +102,18 @@ export class ToDoPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  resetReminders(){
+    for(var i = 0; i < this.items.length;i++){
+      var now = new Date();
+      var itemDate = new Date(this.items[i].myDate);
+        if(itemDate.getDate() <= now.getDate()){
+          if(itemDate.getTime() < now.getTime()){
+            this.items[i].reminder = false;
+            this.dataService.updateTODO(this.items[i]);
+          }
+        }
+    }
   }
 }

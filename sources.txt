@@ -11,3 +11,7 @@ swipe delete funcionality (couldnt get a button to work)
 https://www.thepolyglotdeveloper.com/2015/03/create-todo-list-mobile-app-using-ionic-framework/ 04/03/2017
 
 notifications https://www.thepolyglotdeveloper.com/2016/07/using-local-notifications-ionic-2-mobile-app/ 07/03/2017
+
+updating json
+01/05/2017
+http://stackoverflow.com/questions/19873094/updating-json-file-in-javascript

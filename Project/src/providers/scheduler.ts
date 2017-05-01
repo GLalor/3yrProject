@@ -37,9 +37,4 @@ export class Scheduler {
       LocalNotifications.cancel(item.id);
     }
 
-    public getAllTriggeredNotifications(){
-      return LocalNotifications.getAllTriggered().then(function(notifications){
-        return notifications;
-      });
-    }
 }

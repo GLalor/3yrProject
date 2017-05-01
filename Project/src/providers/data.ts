@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
  
 @Injectable()
 export class Data {
+  oldData = [];
   constructor(public storage: Storage){
  
   }
@@ -25,4 +26,19 @@ export class Data {
     return this.storage.get('itemID');
   }
  
+  updateTODO(newData){
+    console.log("in update");
+     this.getData().then((todos) => {
+        if(todos){
+          this.oldData = JSON.parse(todos);
+          console.log("oldData "+ this.oldData[0].id);
+        }
+     }); 
+     for(var i = 0; i < this.oldData.length; i++){
+       if(this.oldData[i].id == newData.id){
+         this.oldData[i] = newData;
+         this.save(this.oldData);
+       }
+     } 
+  }
 }
